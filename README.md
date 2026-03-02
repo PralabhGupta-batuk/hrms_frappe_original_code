@@ -27,6 +27,12 @@
 
 Frappe HR has everything you need to drive excellence within the company. It's a complete HRMS solution with over 13 different modules right from Employee Management, Onboarding, Leaves, to Payroll, Taxation, and more!
 
+### Progressive Web App (PWA) Support
+
+Frappe HR includes full PWA capabilities with offline support, push notifications, and installable mobile experience. For detailed information about the PWA implementation, see:
+- **[PWA Implementation Guide](PWA_IMPLEMENTATION.md)** - Comprehensive documentation on PWA architecture, components, and setup
+- **[PWA Files Reference](PWA_FILES.md)** - Quick reference listing all 41 PWA-related files in the codebase
+
 ## Motivation
 When Frappe team started growing in terms of size, we needed an open-source HR and Payroll software. We didn't find any "true" open-source HR software out there and so decided to build one ourselves.
 Initially, it was a set of modules within ERPNext but version 14 onwards, as the modules became more mature, Frappe HR was created as a separate product.
