@@ -105,7 +105,7 @@ class AuthProvider with ChangeNotifier {
         await _storage.write(key: AppConfig.employeeIdKey, value: _employeeId);
       }
     } catch (e) {
-      print('Error fetching user profile: $e');
+      debugPrint('Error fetching user profile: $e');
     }
   }
   

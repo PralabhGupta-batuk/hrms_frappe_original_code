@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'api_client.dart';
 import '../config/app_config.dart';
@@ -19,9 +20,9 @@ class NotificationService {
     );
     
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted notification permission');
+      debugPrint('User granted notification permission');
     } else {
-      print('User declined or has not accepted notification permission');
+      debugPrint('User declined or has not accepted notification permission');
     }
     
     // Initialize local notifications
@@ -50,7 +51,7 @@ class NotificationService {
     // Get FCM token
     String? token = await _firebaseMessaging.getToken();
     if (token != null) {
-      print('FCM Token: $token');
+      debugPrint('FCM Token: $token');
       await registerToken(token);
     }
     
@@ -59,8 +60,8 @@ class NotificationService {
     
     // Handle foreground messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
+      debugPrint('Got a message whilst in the foreground!');
+      debugPrint('Message data: ${message.data}');
       
       if (message.notification != null) {
         _showLocalNotification(message);
@@ -69,7 +70,7 @@ class NotificationService {
     
     // Handle notification taps when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('Notification caused app to open from background');
+      debugPrint('Notification caused app to open from background');
       _handleNotificationMessage(message);
     });
     
@@ -89,9 +90,9 @@ class NotificationService {
           'device_type': 'mobile',
         },
       );
-      print('FCM token registered with backend');
+      debugPrint('FCM token registered with backend');
     } catch (e) {
-      print('Error registering FCM token: $e');
+      debugPrint('Error registering FCM token: $e');
     }
   }
   
@@ -105,9 +106,9 @@ class NotificationService {
         );
       }
       await _firebaseMessaging.deleteToken();
-      print('FCM token unregistered');
+      debugPrint('FCM token unregistered');
     } catch (e) {
-      print('Error unregistering FCM token: $e');
+      debugPrint('Error unregistering FCM token: $e');
     }
   }
   
@@ -138,13 +139,13 @@ class NotificationService {
   }
   
   static void _handleNotificationTap(NotificationResponse details) {
-    print('Notification tapped: ${details.payload}');
+    debugPrint('Notification tapped: ${details.payload}');
     // Navigate to appropriate screen based on payload
     // This will be handled by the router
   }
   
   static void _handleNotificationMessage(RemoteMessage message) {
-    print('Handling notification message: ${message.data}');
+    debugPrint('Handling notification message: ${message.data}');
     // Extract reference_document_type and reference_document_name
     // Navigate to appropriate screen
     final data = message.data;
@@ -152,7 +153,7 @@ class NotificationService {
         data.containsKey('reference_document_name')) {
       final docType = data['reference_document_type'];
       final docName = data['reference_document_name'];
-      print('Navigate to $docType: $docName');
+      debugPrint('Navigate to $docType: $docName');
       // Implement navigation logic based on docType
     }
   }
